@@ -9,6 +9,7 @@ import Layout from '@/layout'
 /* Router Modules */
 
 import chartsRouter from './modules/charts'
+import Visualization from './modules/visualization'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -89,6 +90,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  Visualization,
   {
     path: '/permission',
     component: Layout,
