@@ -70,6 +70,7 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    // 默认的欢迎资源页面，路径为空的时候要跳转到dashboard文件下。
     path: '/',
     component: Layout,
     redirect: '/dashboard',

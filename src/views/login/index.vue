@@ -153,6 +153,7 @@ export default {
       })
     },
     handleLogin() {
+      console.log(this.$refs.loginForm)
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
