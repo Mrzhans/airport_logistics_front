@@ -23,6 +23,10 @@
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
 
+      <div class="drawer-item">
+        <span>危险品图像告警模式</span>
+        <el-switch v-model="dangerousGoodsMode" class="drawer-switch" />
+      </div>
     </div>
   </div>
 </template>
@@ -65,6 +69,17 @@ export default {
       set(val) {
         this.$store.dispatch('settings/changeSetting', {
           key: 'sidebarLogo',
+          value: val
+        })
+      }
+    },
+    dangerousGoodsMode: {
+      get() {
+        return this.$store.state.settings.dangerousGoodsMode
+      },
+      set(val) {
+        this.$store.dispatch('settings/changeSetting', {
+          key: 'dangerousGoodsMode',
           value: val
         })
       }

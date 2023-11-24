@@ -81,8 +81,10 @@ export default {
   name: 'Login',
   components: { SocialSign },
   data() {
+    // 类似lamada表达式，验证用户名是否正确是一个函数
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
+        // 回调给调用的函数
         callback(new Error('Please enter the correct user name'))
       } else {
         callback()
@@ -98,9 +100,10 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '111111'
+        password: '1234566'
       },
       loginRules: {
+        // 其中的验证器是一个函数
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
@@ -118,6 +121,7 @@ export default {
         const query = route.query
         if (query) {
           this.redirect = query.redirect
+          // 排除了redirect剩下的一些查询参数
           this.otherQuery = this.getOtherQuery(query)
         }
       },
@@ -153,7 +157,6 @@ export default {
       })
     },
     handleLogin() {
-      console.log(this.$refs.loginForm)
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
@@ -162,8 +165,9 @@ export default {
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             })
-            .catch(() => {
+            .catch((error) => {
               this.loading = false
+              console.log(error)
             })
         } else {
           console.log('error submit!!')

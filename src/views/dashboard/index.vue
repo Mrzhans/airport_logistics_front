@@ -18,6 +18,7 @@ export default {
     }
   },
   computed: {
+    // 通过mapGetters创建了一个role属性
     ...mapGetters([
       'roles'
     ])

@@ -70,7 +70,6 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    // 默认的欢迎资源页面，路径为空的时候要跳转到dashboard文件下。
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -83,7 +82,6 @@ export const constantRoutes = [
       }
     ]
   }
-
 ]
 
 /**
@@ -130,6 +128,35 @@ export const asyncRoutes = [
           title: 'Role Permission',
           roles: ['admin']
         }
+      }
+    ]
+  },
+  /*
+    用户设置模块，里面有分为三个子模块。
+    1、用户管理模块，管理员能够对用户进行增删改查操作。
+    2、全局设置模块，管理员能够对算法的一些违禁品，危险品等的设置。
+  */
+  {
+    path: '/userset',
+    component: Layout,
+    redirect: '/userset/control',
+    name: 'userset',
+    meta: {
+      title: '用户设置',
+      icon: 'dashboard'
+    },
+    children: [
+      {
+        path: 'control',
+        component: () => import('@/views/userset/control'),
+        name: 'user_control',
+        meta: { title: '用户管理' }
+      },
+      {
+        path: 'param',
+        component: () => import('@/views/userset/param'),
+        name: 'paramset',
+        meta: { title: '违禁品设置' }
       }
     ]
   },

@@ -29,6 +29,7 @@ module.exports = {
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
+  // 跨域请求配置
   devServer: {
     port: port,
     open: true,
@@ -36,6 +37,14 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    proxy: {
+      '/django': {
+        target: 'http://localhost:8000', // Django 服务器地址
+        ws: true,
+        changeOrigin: true
+      }
+    },
+    // 路径重写
     before: require('./mock/mock-server.js')
   },
   configureWebpack: {

@@ -25,6 +25,8 @@ module.exports = {
    */
   sidebarLogo: false,
 
+  dangerousGoodsMode: true,
+
   /**
    * @type {string | array} 'production' | ['production', 'development']
    * @description Need show err logs component.

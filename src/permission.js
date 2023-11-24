@@ -10,7 +10,9 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
+// to想要去到的路由（json格式，也就是router.js里面的每个json对象。）from 从什么路径去，一般是当前的url
 router.beforeEach(async(to, from, next) => {
+  console.log(to.path)
   // start progress bar
   NProgress.start()
 
@@ -19,11 +21,12 @@ router.beforeEach(async(to, from, next) => {
 
   // determine whether the user has logged in
   const hasToken = getToken()
+  console.log(hasToken)
 
   if (hasToken) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
-      next({ path: '/' })
+      next({ path: '/' }) // 根目录自动跳转到dashboard
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
       // determine whether the user has obtained his permission roles through getInfo
@@ -38,6 +41,7 @@ router.beforeEach(async(to, from, next) => {
 
           // generate accessible routes map based on roles
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          console.log(accessRoutes)
 
           // dynamically add accessible routes
           router.addRoutes(accessRoutes)
@@ -61,6 +65,7 @@ router.beforeEach(async(to, from, next) => {
       // in the free login whitelist, go directly
       next()
     } else {
+      // 这里是将redirect当成一个参数进行传输过去的
       // other pages that do not have permission to access are redirected to the login page.
       next(`/login?redirect=${to.path}`)
       NProgress.done()

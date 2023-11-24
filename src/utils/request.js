@@ -14,7 +14,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-    // 获取token，判断是否登录
+
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
